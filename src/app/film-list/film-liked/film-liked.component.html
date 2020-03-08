@@ -1,0 +1,45 @@
+<div class="column">
+
+
+
+    <div class="text-center" *ngIf="!dataReceive" >
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="text-center" *ngIf="films.length === 0" >
+        <h3>0 Film Liked</h3>
+    </div>
+
+
+    
+    <div class="col">
+        <a class="list-group-item list-group-item-action flex-column align-items-start"
+            *ngFor="let film of films; let i = index">
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img *ngIf="film.poster_path" style="max-height: 400px;" [src]="getImage(film.poster_path)" class="card-img-top">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h2 class="card-title"> {{ film.title }} </h2>
+                                <small id="book-delete" style="cursor: pointer;" (click)="onLikePressed(film.id)">
+                                    <div *ngIf="film.liked; then thenBlock else elseBlock"></div>
+                                    <ng-template #thenBlock>unlike</ng-template>
+                                    <ng-template #elseBlock>like</ng-template>
+                                </small>
+                            </div>
+                            <small class="card-title"> {{ film.original_title }} </small>
+                            <h5 class="card-title"> {{ film.overview }} </h5>
+                            <p class="card-text"> {{ film.release_date }} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>

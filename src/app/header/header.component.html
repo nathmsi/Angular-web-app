@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 fixed-top">
+
+
+  <a class="navbar-brand" routerLink="">Home</a>
+
+  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
+  </button>
+
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="books" (click)="isMenuCollapsed = true">Books </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="films" (click)="isMenuCollapsed = true">Films </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="films/liked" (click)="isMenuCollapsed = true">Films liked</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="blog" (click)="isMenuCollapsed = true">blog</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="about" (click)="isMenuCollapsed = true">About</a>
+      </li>
+    </ul>
+
+
+    <ul class="navbar-nav ml-auto">
+
+      <!-- <li class="nav-item" *ngIf="isAuth">
+         <p class="nav-link waves-light text-dark"> <span class="font-weight-bold">Welcome </span>  {{ username }} </p>
+      </li> -->
+
+      <li class="nav-item "  *ngIf="isAuth">
+        <div class="nav-link waves-light">
+          <span class="font-weight-bold">Welcome </span> {{ username }}
+        </div>
+      </li>
+
+
+
+      <li class="nav-item " style="cursor:pointer" *ngIf="!isAuth">
+        <a class="nav-link waves-light" (click)="isMenuCollapsed = true" routerLink="auth/signup"> SignUp </a>
+      </li>
+      <li class="nav-item " style="cursor:pointer" *ngIf="!isAuth">
+        <a class="nav-link waves-light" (click)="isMenuCollapsed = true" routerLink="auth/signin"> LogIn</a>
+      </li>
+      <li class="nav-item" style="cursor:pointer" (click)="onSignOut()" *ngIf="isAuth">
+        <a class="nav-link waves-light" (click)="isMenuCollapsed = true"> LogOut</a>
+      </li>
+    </ul>
+
+  </div>
+
+
+
+
+</nav>

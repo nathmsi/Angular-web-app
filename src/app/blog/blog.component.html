@@ -1,0 +1,36 @@
+<div class="col pb-3">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-group row">
+            <div class="col-sm-8">
+                <input #referenceMessage type="text" id="message" class="form-control" placeholder="Enter message"
+                    name="message" ngModel (keydown)="onKeydown($event,f)" required>
+            </div>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-outline-dark btn-block" [disabled]="f.invalid">send</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="text-center" *ngIf="!dataReceive">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div class="blog-messages">
+    <div class="blog-message" *ngFor="let message of messages; let i = index">
+        <div *ngIf=" message.name ===  username; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <p class="blog-user-message">
+                {{ message.content }}
+            </p>
+        </ng-template>
+        <ng-template #elseBlock>
+            <p class="blog-not-user-message">
+                <strong> {{ message.name }} : </strong>
+                {{ message.content }}
+            </p>
+        </ng-template>
+    </div>
+</div>

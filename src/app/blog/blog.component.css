@@ -1,0 +1,76 @@
+/* ----------------------------
+	MESSAGE
+---------------------------- */
+
+.blog-message {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.blog-message > * {
+	padding: 5px 10px;
+	max-width: 75%;
+	border-radius: 2px;
+	margin: 10px 0;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+.blog-not-user-message {
+	background-color: #8bffa4;
+	align-self: flex-start;
+	position: relative;
+}
+
+.blog-not-user-message:after {
+	content: '';
+	position: absolute;
+	top: -7px;
+	left: 10px;
+	width: 0;
+	border-width: 0 10px 7px 0;
+	border-style: solid;
+	border-color: #8bffa4 transparent;
+}
+
+.blog-user-message {
+	background-color: #2196F3;
+	color: #fff;
+	align-self: flex-end;
+	position: relative;
+}
+
+.blog-user-message:after {
+	content: '';
+	position: absolute;
+	bottom: -7px;
+	right: 10px;
+	width: 0;
+	border-width: 7px 0 0 10px;
+	border-style: solid;
+	border-color: #2196F3 transparent;
+}
+
+
+
+/* ----------------------------
+	MESSAGES
+---------------------------- */
+
+.blog-messages {
+	flex: 1 1 100%;
+	/*border: 5px solid red;*/
+	box-sizing: border-box;
+	align-self: flex-end;
+	max-height: calc(100vh - 310px);
+	overflow-y: scroll;
+	-webkit-overflow-scrolling:touch;
+}
+
+.blog-messages::-webkit-scrollbar {
+    width: 0.4em;
+}
+ 
+.blog-messages::-webkit-scrollbar-thumb {
+  background-color: #eceff1;
+}
