@@ -25,12 +25,10 @@ export class BookListComponent implements OnInit, OnDestroy {
       (books: Book[]) => {
         this.books = books;
         this.dataReceive = true;
-        //console.log(books);
+        books.length > 0 && console.log("%c BOOKS \n array object Book", "color:orange" , books );
       }
     );
     this.booksService.emitBooks();
-    this.dataReceive = false;
-    this.booksService.getBooks();
   }
 
   onNewBook() {

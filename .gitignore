@@ -3,13 +3,18 @@
 # dependencies
 /node_modules
 
-/src/services
+
+
+
+/.firebase
 
 # testing
 /coverage
 
 # production
 /build
+/dist
+/e2e
 
 # misc
 .DS_Store

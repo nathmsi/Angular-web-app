@@ -1,0 +1,37 @@
+<!-- Header -->
+<header class="bg-light text-center py-5 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-dark">My account</h1>
+    </div>
+</header>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-2 p-o d-flex justify-content-center">
+            <img style="max-height: 150px; max-width: 150px;" [src]="user.photo" class="card-img-bottom rounded-circle">
+        </div>
+        <div class="col-xl-10 p-0">
+                <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                    <div class="input-group m-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">username</span>
+                        </div>
+                        <input type="text" class="form-control" name="username" id="" [ngModel]="user.name"
+                            placeholder="username">
+                    </div>
+                    <div class="input-group m-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Image Profil</span>
+                        </div>
+                        <input type="file" (change)="detectFiles($event)" class="form-control" accept="image/*">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-secondary" type='button' (click)="saveImage()">Save image </button>
+                        </div>
+                    </div>
+                    <p class="text-success" *ngIf="fileUploaded">File saved !</p>
+                    <button type="submit" class="btn btn-primary ml-2">Save</button>
+                </form>
+        </div>
+    </div>
+</div>

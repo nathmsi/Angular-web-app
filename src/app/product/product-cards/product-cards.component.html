@@ -1,0 +1,33 @@
+<div class="text-center p-4" *ngIf="!dataReceive">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="dataReceive">
+    <div class="row p-3" *ngIf="categorie === 'Kippots' ">
+        <div class="col-lg p-1">
+            <select class="custom-select" id="categorie" [(ngModel)]="sizeSelected" (change)="selectOptionSize()">
+                <option value="" selected>Size all</option>
+                <option value="12">Size 12 cm</option>
+                <option value="14">Size 14 cm</option>
+                <option value="16">Size 16 cm</option>
+                <option value="18">Size 18 cm</option>
+            </select>
+        </div>
+        <div class="col-lg p-1">
+            <select class="custom-select" id="categorie" [(ngModel)]="qualitySelected" (change)="selectOptionQuality()">
+                <option value="" selected>Quality all</option>
+                <option value="srouga">Quality srougua (סרוגה) </option>
+                <option value="bad">Quality bad (בד)</option>
+                <option value="ktifa">Quality ktifa (קטיפה)</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4" *ngFor="let product of productFilter; let i = index">
+            <app-card-view [product]="product" [onDeleteProduct]="onDeleteProduct" [onAddToCard]="onAddToCard">
+            </app-card-view>
+        </div>
+    </div>
+</div>

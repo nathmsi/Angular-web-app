@@ -1,59 +1,31 @@
-<div class="column">
-
-    <div class="col">
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-            <div class="form-group row">
-                <div class="col-sm-8">
-                    <input type="text" id="name" class="form-control" placeholder="Enter film" name="film" ngModel
-                        (keydown)="onKeydown($event,f)" required>
-                </div>
-                <div class="col-sm-4">
-                    <button type="submit" class="btn btn-outline-dark btn-block" [disabled]="f.invalid">Search</button>
-                </div>
-            </div>
-        </form>
+<header class="bg-light text-center py-5 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-dark"> Film API</h1>
     </div>
+</header>
 
-    <div class="col text-center" *ngIf="!dataReceive">
-        <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
+
+
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group row">
+        <div class="col-sm-8">
+            <input type="text" id="name" class="form-control" placeholder="Enter film" name="film"
+                [ngModel]="filmSearch" (keydown)="onKeydown($event,f)" required>
+        </div>
+        <div class="col-sm-4">
+            <button type="submit" class="btn btn-outline-dark btn-block" [disabled]="f.invalid">Search</button>
         </div>
     </div>
+</form>
 
-    <div class="col">
-        <a class="list-group-item list-group-item-action flex-column align-items-start"
-            *ngFor="let film of films; let i = index">
-            <div class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="col-md-2">
-                        <img *ngIf="film.poster_path" style="max-height: 300; max-width: 200px;" [src]="getImage(film.poster_path)"
-                            class="card-img-top">
-                    </div>
-                    <div class="col-md-10">
-                        <div class="card-body">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h2 class="card-title"> {{ film.title }} </h2>
-                                <small id="book-delete" style="cursor: pointer;" (click)="onLikePressed(film.id)">
-                                    <div *ngIf="film.liked; then thenBlock else elseBlock"></div>
-                                    <ng-template #thenBlock>unlike</ng-template>
-                                    <ng-template #elseBlock>like</ng-template>
-                                </small>
-                            </div>
-                            <small class="card-title"> {{ film.original_title }} </small>
-                            <p class="card-title">
-                                {{ film.overview.substring(0,limiteTexte) }}
-                                <span *ngIf=" film.overview.length > limiteTexte"> ...</span>
-                                <button *ngIf=" film.overview.length > limiteTexte" class="btn btn-link"
-                                    (click)="onReadMore()">Read more</button>
-                                <button *ngIf=" film.overview.length < limiteTexte" class="btn btn-link"
-                                    (click)="onReadLess()">Read Less</button>
-                            </p>
-                            <p class="card-text"> {{ film.release_date }} </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
+<div class="text-center" *ngIf="!dataReceive">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
+</div>
 
+
+
+<div *ngFor="let film of films; let i = index">
+    <app-film-view [film]="film"></app-film-view>
 </div>

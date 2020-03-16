@@ -13,10 +13,9 @@ export class FilmListComponent implements OnInit {
   
   filmsSubscription: Subscription;
   films: Film[];
+  filmSearch: string = '';
 
   dataReceive: boolean = false;
-  limiteTexte: number = 350;
-
   constructor(private FilmService: FilmService) {
   
   }
@@ -26,10 +25,12 @@ export class FilmListComponent implements OnInit {
       (films: Film[]) => {
         this.films = films;
         this.dataReceive = true;
-        console.log(films);
+        films.length > 0 && console.log("%c FILMS \n array object Film", "color:orange" , films );
       }
     );
+    this.filmSearch= 'harry potter';
     this.FilmService.emitFilmSubject();
+    this.dataReceive = false;
     this.FilmService.getFilmsFromApiWithSearchedText('harry potter');
   }
 
@@ -40,9 +41,6 @@ export class FilmListComponent implements OnInit {
     this.FilmService.getFilmsFromApiWithSearchedText(film);
   }
 
-  getImage(name){
-    return 'https://image.tmdb.org/t/p/w300' + name
-  }
 
   onKeydown(event,form: NgForm) {
     if (event.key === "Enter") {
@@ -50,17 +48,8 @@ export class FilmListComponent implements OnInit {
     }
   }
 
-  onLikePressed(id: number){
-    this.FilmService.likeFilm(id);
-  }
+  
 
-  onReadMore(){
-    this.limiteTexte = this.limiteTexte * 2;
-  }
-
-  onReadLess(){
-      this.limiteTexte = 350;
-  }
 
   ngOnDestroy() {
     this.filmsSubscription.unsubscribe();

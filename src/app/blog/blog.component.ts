@@ -21,18 +21,18 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   constructor(private blogService: BlogService) {
     this.username =  this.blogService.user.name;
+
   }
 
   ngOnInit() {
     this.messagesSubscription = this.blogService.blogSubject.subscribe(
       (messages: Message[]) => {
         this.messages = messages;
+        messages.length > 0 && console.log("%c BLOG \n array object Message", "color:orange" , messages );
         this.dataReceive = true;
       }
     );
     this.blogService.emitMessages();
-    this.dataReceive = false;
-    this.blogService.getMessages();
   }
 
 

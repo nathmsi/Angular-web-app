@@ -38,6 +38,7 @@ export class BooksService {
   }
 
   getBooks() {
+    console.log("%c getBooks()  ", "color:yellow" );
     firebase.database().ref('/books')
       .on('value', (data) => {
         this.books = data.val() ? data.val() : [];
@@ -62,6 +63,7 @@ export class BooksService {
 
   createNewBook(newBook: Book) {
     this.books.push(newBook);
+    console.log("%c createNewBook => ", "color:yellow" , newBook);
     this.saveBooks();
     this.emitBooks();
   }
@@ -71,10 +73,10 @@ export class BooksService {
       const storageRef = firebase.storage().refFromURL(book.photo);
       storageRef.delete().then(
         () => {
-          console.log('Photo removed!');
+          console.log("%c Photo removed! => ", "color:yellow" );
         },
         (error) => {
-          console.log('Could not remove photo! : ' + error);
+          console.log("%c Photo removed error => ", "color:red" , error );
         }
       );
     }
@@ -86,6 +88,7 @@ export class BooksService {
       }
     );
     this.books.splice(bookIndexToRemove, 1);
+    console.log("%c book removed! => ", "color:yellow", book );
     this.saveBooks();
     this.emitBooks();
 }
@@ -98,10 +101,10 @@ export class BooksService {
           .child('images/' + almostUniqueFileName + file.name).put(file);
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
           () => {
-            console.log('Chargement…');
+            console.log("%c Chargement… => ", "color:yellow" );
           },
           (error) => {
-            console.log('Erreur de chargement ! : ' + error);
+            console.log("%c Erreur Chargement… => ", "color:yellow" , error );
             reject();
           },
           () => {

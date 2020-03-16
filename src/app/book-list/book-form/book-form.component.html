@@ -1,5 +1,10 @@
 
-        <h2 class="text-center">Save a new book</h2>
+        <header class="bg-light text-center py-5 mb-4">
+            <div class="container">
+                <h1 class="font-weight-light text-dark">Save a new book</h1>
+            </div>
+          </header>
+          
         <form class="pt-4" [formGroup]="bookForm" (ngSubmit)="onSaveBook()">
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-1 col-form-label">Title</label>
@@ -31,6 +36,7 @@
             <button class="btn btn-dark btn-block" [disabled]="bookForm.invalid || fileIsUploading" type="submit">
                 Save
             </button>
+            <a class="text-dark" routerLink="books" >return</a>
 
         </form>
    

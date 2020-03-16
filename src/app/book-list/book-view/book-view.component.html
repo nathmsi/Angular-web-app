@@ -1,0 +1,24 @@
+<div class=" mb-3">
+    <div class="row no-gutters">
+        <div class="col-md-1">
+            <img *ngIf="book.photo" style="max-height: 200; max-width: 100;" [src]="book.photo" class="card-img"
+                (load)="isImageLoaded()">
+        </div>
+        <div class="col-md-11" *ngIf="showBook">
+            <div class="card-body p-1">
+                <div class="d-flex w-100 justify-content-between">
+                    <h4 class="card-title mb-0"> {{ book.title }} </h4>
+                </div>
+                <small class="card-title"> {{ book.author }} </small>
+                <p class="card-title m-0">
+                    {{book.synopsis.substring(0,limiteTexte) }}
+                    <button *ngIf="book.synopsis.length > limiteTexte" class="btn btn-link" (click)="onReadMore()">Read
+                        more</button>
+                    <button *ngIf="book.synopsis.length === limiteTexte " class="btn btn-link" (click)="onReadLess()">Read
+                        Less</button>
+                    <!-- <small id="book-delete" style="cursor: pointer;" (click)="onDeleteBook(book)">Delete</small> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

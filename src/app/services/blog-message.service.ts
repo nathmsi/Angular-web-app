@@ -22,7 +22,9 @@ export class BlogService {
     name: 'default',
     email: '',
     uid: "",
-    isAuth: false
+    isAuth: false,
+    photo: "",
+    phone: ""
   };
   userSubscription: Subscription;
 
@@ -34,6 +36,7 @@ export class BlogService {
     );
     this.authService.emitUser();
   }
+  
 
   emitMessages() {
     this.blogSubject.next(this.messages);
@@ -44,12 +47,11 @@ export class BlogService {
   }
 
   getMessages() {
-    //let limit = 5;
+    console.log("%c getMessages()  ", "color:yellow" );
     firebase.database().ref('/messages').limitToLast(10)
       .on('value', (data) => {
         const messageArray = data.val() ?  Object.keys(data.val()).map(i => data.val()[i]) : [];
-        this.messages = messageArray ;     
-        //console.log(this.messages);
+        this.messages = messageArray ;   
         this.emitMessages();
       }
       );
@@ -64,7 +66,10 @@ export class BlogService {
     firebase.database().ref('/messages').push({
       content: message,
       name: this.user.name,
-    });
+    }).then(()=>{
+      console.log("%c createNewMessage => ", "color:yellow" , message);
+    })
+   
     //this.saveMessages();
     this.emitMessages();
   }

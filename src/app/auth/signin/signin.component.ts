@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +16,7 @@ export class SigninComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
+              private toastr: ToastrService,
               private router: Router) { }
 
   ngOnInit() {
@@ -34,10 +36,12 @@ export class SigninComponent implements OnInit {
     
     this.authService.signInUser(email, password).then(
       () => {
+        this.toastr.success('welcome ' + this.authService.user.name);
         this.router.navigate(['/books']);
       },
       (error) => {
         this.errorMessage = error;
+        this.toastr.error(error);
       }
     );
   }

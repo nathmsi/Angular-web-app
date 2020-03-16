@@ -1,3 +1,9 @@
+<header class="bg-light text-center py-5 mb-4">
+  <div class="container">
+    <h1 class="font-weight-light text-dark">DataBase Firebase</h1>
+  </div>
+</header>
+
 <div class="mb-2">
   <button class="btn btn btn-outline-dark btn-block" (click)="onNewBook()">+New Book</button>
 </div>
@@ -9,28 +15,8 @@
 </div>
 
 
-<a class="list-group-item list-group-item-action flex-column align-items-start"
-  *ngFor="let book of books; let i = index">
-  <div class="card mb-3">
-    <div class="row no-gutters">
-      <div class="col-md-2">
-        <img *ngIf="book.photo" style="max-height: 300; max-width: 200px;" [src]="book.photo" class="card-img-top">
-      </div>
-      <div class="col-md-10">
-        <div class="card-body">
-          <div class="d-flex w-100 justify-content-between">
-            <h2 class="card-title"> {{ book.title }} </h2>
-          </div>
-          <p class="card-title">
-            {{ book.synopsis.substring(0,limiteTexte) }} 
-            <span *ngIf=" book.synopsis.length > limiteTexte"> ...</span>
-            <button *ngIf=" book.synopsis.length > limiteTexte" class="btn btn-link" (click)="onReadMore()">Read more</button>
-            <button *ngIf=" book.synopsis.length < limiteTexte"  class="btn btn-link" (click)="onReadLess()">Read Less</button>
-          </p>
-          <p class="card-title"> Author : {{  book.author }} </p>
-          <!-- <small id="book-delete" style="cursor: pointer;" (click)="onDeleteBook(book)">Delete</small> -->
-        </div>
-      </div>
-    </div>
-  </div>
-</a>
+<div class="" *ngFor="let book of books; let i = index">
+
+  <app-book-view [book]="book"></app-book-view>
+
+</div>

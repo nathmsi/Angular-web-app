@@ -1,61 +1,107 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 fixed-top">
+<nav [ngClass]="{'navbar navbar-expand-lg navbar-light fixed-top': true, 'bg-light': true }">
 
 
-  <a class="navbar-brand" routerLink="">Home</a>
+  <a class="navbar-brand" routerLink="" *ngIf="isMobile" (click)="isMenuCollapsed = true">
+    <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
+  </a>
+  <a class="navbar-brand" routerLink="shopping-cart" *ngIf="isMobile" (click)="isMenuCollapsed = true"
+    [routerLinkActive]="['text-primary','font-weight-bolder']">
+    <mat-icon aria-hidden="false" [matBadge]="lengthShoppingCard" aria-label="home icon">shopping_cart</mat-icon>
+  </a>
+
+  <a class="nav-link waves-light" *ngIf="user.isAuth && isMobile" style="cursor:pointer" routerLink="account"
+    (click)="isMenuCollapsed = true">
+    <span class="font-weight-bold">Welcome </span> {{ user.name }}
+  </a>
+
 
   <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
     &#9776;
   </button>
 
 
-  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
 
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse ">
+
+
+    <a class="navbar-brand" routerLink="" *ngIf="!isMobile" (click)="isMenuCollapsed = true">
+      <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
+    </a>
+
+    <ul class="navbar-nav nav-tabs mr-auto" id="navigation-bar">
       <li class="nav-item ">
-        <a class="nav-link" routerLink="books" (click)="isMenuCollapsed = true">Books </a>
+        <a class="nav-link " routerLink="books" [routerLinkActive]="['navigation-bar-active']"
+          (click)="isMenuCollapsed = true">
+          Books
+        </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" routerLink="films" (click)="isMenuCollapsed = true">Films </a>
+        <a class="nav-link" routerLink="films" [routerLinkActive]="['navigation-bar-active']"
+          (click)="isMenuCollapsed = true">
+          Films
+        </a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link" routerLink="films/liked" (click)="isMenuCollapsed = true">Films liked</a>
+      <li class="nav-item  ">
+        <a class="nav-link" routerLink="films-liked" [routerLinkActive]="['navigation-bar-active']"
+          (click)="isMenuCollapsed = true">
+          Films liked
+        </a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link" routerLink="blog" (click)="isMenuCollapsed = true">blog</a>
+      <li class="nav-item  ">
+        <a class="nav-link" routerLink="blog" [routerLinkActive]="['navigation-bar-active']"
+          (click)="isMenuCollapsed = true">
+          Blog
+        </a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link" routerLink="about" (click)="isMenuCollapsed = true">About</a>
+      <li class="nav-item  ">
+        <a class="nav-link" routerLink="product" [routerLinkActive]="['navigation-bar-active']"
+          (click)="isMenuCollapsed = true">
+          Products
+        </a>
       </li>
-    </ul>
-
-
-    <ul class="navbar-nav ml-auto">
-
-      <!-- <li class="nav-item" *ngIf="isAuth">
-         <p class="nav-link waves-light text-dark"> <span class="font-weight-bold">Welcome </span>  {{ username }} </p>
-      </li> -->
-
-      <li class="nav-item "  *ngIf="isAuth">
-        <div class="nav-link waves-light">
-          <span class="font-weight-bold">Welcome </span> {{ username }}
-        </div>
-      </li>
-
-
-
-      <li class="nav-item " style="cursor:pointer" *ngIf="!isAuth">
-        <a class="nav-link waves-light" (click)="isMenuCollapsed = true" routerLink="auth/signup"> SignUp </a>
-      </li>
-      <li class="nav-item " style="cursor:pointer" *ngIf="!isAuth">
-        <a class="nav-link waves-light" (click)="isMenuCollapsed = true" routerLink="auth/signin"> LogIn</a>
-      </li>
-      <li class="nav-item" style="cursor:pointer" (click)="onSignOut()" *ngIf="isAuth">
-        <a class="nav-link waves-light" (click)="isMenuCollapsed = true"> LogOut</a>
+      <li class="nav-item  ">
+        <a class="nav-link" routerLink="about" [routerLinkActive]="['navigation-bar-active']"
+          (click)="isMenuCollapsed = true">
+          About
+        </a>
       </li>
     </ul>
 
   </div>
 
+
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse ">
+    <ul class="navbar-nav ml-auto">
+
+      <a class="nav-link waves-light" *ngIf="user.isAuth && !isMobile" routerLink="account"
+        [routerLinkActive]="['text-primary']" (click)="isMenuCollapsed = true">
+        <!-- <mat-icon aria-hidden="false" aria-label="home icon">person</mat-icon> -->
+        Welecome <span class="font-weight-bolder">{{ user.name }}</span>
+      </a>
+
+      <li class="nav-item " style="cursor:pointer" *ngIf="!user.isAuth">
+        <a class="nav-link waves-light" (click)="isMenuCollapsed = true" routerLink="auth/signup"> SignUp </a>
+      </li>
+
+      <li class="nav-item " style="cursor:pointer" *ngIf="!user.isAuth">
+        <a class="nav-link waves-light" (click)="isMenuCollapsed = true" routerLink="auth/signin"> LogIn</a>
+      </li>
+
+
+      <a class="navbar-brand" routerLink="shopping-cart" *ngIf="!isMobile" (click)="isMenuCollapsed = true"
+        [routerLinkActive]="['text-primary','font-weight-bolder']">
+        <mat-icon aria-hidden="false" [matBadge]="lengthShoppingCard" aria-label="home icon">shopping_cart</mat-icon>
+      </a>
+
+
+
+
+      <li class="nav-item" style="cursor:pointer" (click)="onSignOut()" *ngIf="user.isAuth">
+        <a class="nav-link waves-light" (click)="isMenuCollapsed = true">LogOut</a>
+      </li>
+    </ul>
+  </div>
 
 
 

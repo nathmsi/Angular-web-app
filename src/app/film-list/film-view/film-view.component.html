@@ -1,0 +1,28 @@
+
+<div class="card mb-3">
+    <div class="row no-gutters">
+        <div class="col-md-1">
+            <img *ngIf="film.poster_path" style="max-height: 200; max-width: 150;"
+                [src]="getImage(film.poster_path)" class="card-img">
+        </div>
+        <div class="col-md-11">
+            <div class="card-body p-1">
+                <div class="d-flex w-100 justify-content-between">
+                    <h4 class="card-title mb-0"> {{ film.title }} </h4>
+
+                        <mat-icon *ngIf="!film.liked" style="cursor:pointer" (click)="onLikePressed(film.id)" >star_border</mat-icon>
+                        <mat-icon *ngIf="film.liked"  style="cursor:pointer" (click)="onLikePressed(film.id)" >star</mat-icon>
+                </div>
+                <small class="card-title"> {{ film.original_title }} </small>
+                <small class="card-text"> {{ film.release_date }} </small>
+                <p class="card-title m-0">
+                    {{ film.overview.substring(0,limiteTexte) }}
+                    <button *ngIf=" film.overview.length > limiteTexte" class="btn btn-link"
+                        (click)="onReadMore()">Read more</button>
+                    <button *ngIf=" film.overview.length === limiteTexte " class="btn btn-link"
+                        (click)="onReadLess()">Read Less</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FilmService } from '../../services/film-api.service';
 import { Subscription } from 'rxjs';
 import { Film } from '../../models/film.model';
-import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -13,12 +12,10 @@ import { NgForm } from '@angular/forms';
 export class FilmLikedComponent implements OnInit {
 
   filmsLikedSubscription: Subscription;
-  films: Film[];
+  films: Film[] = [];
 
   dataReceive: boolean = false;
-
   constructor(private FilmService: FilmService) {
-  
   }
 
   ngOnInit() {
@@ -28,18 +25,13 @@ export class FilmLikedComponent implements OnInit {
         this.dataReceive = true;
       }
     );
+    this.FilmService.getLikeFilm();
+    this.dataReceive = false;
     this.FilmService.emitFilmSubject();
   }
 
 
-  getImage(name){
-    return 'https://image.tmdb.org/t/p/w300' + name
-  }
 
-
-  onLikePressed(id: number){
-    this.FilmService.likeFilm(id);
-  }
 
   ngOnDestroy() {
     this.filmsLikedSubscription.unsubscribe();

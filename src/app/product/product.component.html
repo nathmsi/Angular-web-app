@@ -1,0 +1,22 @@
+<div class="text-center p-4">
+    <button class="btn btn btn-outline-dark btn-block " (click)="addProduct()">+New product</button>
+</div>
+
+
+<mat-tab-group mat-stretch-tabs  class="example-stretched-tabs mat-elevation-z2" >
+    <mat-tab label="Kippots">
+        <app-product-cards [categorie]="'Kippots'"  >
+        </app-product-cards>
+    </mat-tab>
+    <mat-tab label="books">
+        <app-product-cards [categorie]="'Books'"  >
+        </app-product-cards>
+    </mat-tab>
+    <mat-tab label="Tallits">
+        <app-product-cards [categorie]="'Tallits'"   ></app-product-cards>
+    </mat-tab>
+    <mat-tab label="All">
+        <app-product-cards [categorie]="'All'"  ></app-product-cards>
+    </mat-tab>
+
+</mat-tab-group>

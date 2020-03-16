@@ -1,16 +1,10 @@
-<div class="col pb-3">
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div class="form-group row">
-            <div class="col-sm-8">
-                <input #referenceMessage type="text" id="message" class="form-control" placeholder="Enter message"
-                    name="message" ngModel (keydown)="onKeydown($event,f)" required>
-            </div>
-            <div class="col-sm-4">
-                <button type="submit" class="btn btn-outline-dark btn-block" [disabled]="f.invalid">send</button>
-            </div>
-        </div>
-    </form>
-</div>
+<header class="bg-light text-center py-5 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-dark">Real Time Data Base Firebase</h1>
+    </div>
+</header>
+
+
 
 <div class="text-center" *ngIf="!dataReceive">
     <div class="spinner-border" role="status">
@@ -33,4 +27,19 @@
             </p>
         </ng-template>
     </div>
+</div>
+
+
+<div class="col pb-3">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-group row">
+            <div class="col-sm-8 p-2">
+                <input #referenceMessage type="text" id="message" class="form-control" placeholder="Enter message"
+                    name="message" ngModel (keydown)="onKeydown($event,f)" required>
+            </div>
+            <div class="col-sm-4 p-2">
+                <button type="submit" class="btn btn-outline-dark btn-block" [disabled]="f.invalid">send</button>
+            </div>
+        </div>
+    </form>
 </div>
